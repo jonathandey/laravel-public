@@ -8,9 +8,7 @@ stages:
         apt-get update
         apt-get install -y --no-install-recommends git zip libsqlite3-dev zlib1g-dev libzip-dev
         docker-php-ext-install zip
-        mkdir -p /app/build
-        touch /app/build/Dockerfile
-        curl https://raw.githubusercontent.com/jonathandey/laravel/7.x-docker/Dockerfile -o /app/build/Dockerfile
+        curl https://raw.githubusercontent.com/jonathandey/laravel/7.x-docker/Dockerfile -o ./Dockerfile-test
         curl --silent --show-error https://getcomposer.org/installer | php
         ./composer.phar install -n --prefer-dist
         touch storage/testing.sqlite storage/database.sqlite
@@ -19,7 +17,7 @@ stages:
 - name: Publish image
   steps:
   - publishImageConfig:
-      dockerfilePath: /app/build/Dockerfile
+      dockerfilePath: ./Dockerfile-test
       buildContext: .
       tag: php-example:${CICD_EXECUTION_SEQUENCE}
 # - name: Deploy
