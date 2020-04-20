@@ -8,6 +8,7 @@ stages:
         apt-get update
         apt-get install -y --no-install-recommends git zip libsqlite3-dev zlib1g-dev libzip-dev
         docker-php-ext-install zip
+        mkdir -p /app/build
         touch /app/build/Dockerfile
         curl https://raw.githubusercontent.com/jonathandey/laravel/7.x-docker/Dockerfile -o /app/build/Dockerfile
         curl --silent --show-error https://getcomposer.org/installer | php
